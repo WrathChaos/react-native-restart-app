@@ -1,118 +1,163 @@
-<img alt="React Native Typescript Library Starter" src="assets/logo.png" width="1050"/>
+# React Native Restart App
 
-[![Battle Tested ✅](https://img.shields.io/badge/-Battle--Tested%20%E2%9C%85-03666e?style=for-the-badge)](https://github.com/WrathChaos/react-native-typescript-library-starter)
+A lightweight and efficient React Native library that provides native app restart functionality for both iOS and Android platforms. Perfect for scenarios where you need to completely reset your app's state or handle critical errors.
 
-[![React Native Typescript Library Starter](https://img.shields.io/badge/-Extremely%20easy%20to%20create%20a%20React%20Native%20Component%20Library%20with%20both%20Stateful%20and%20Functional%20Component%20Examples-orange?style=for-the-badge)](https://github.com/WrathChaos/react-native-typescript-library-starter)
+![npm](https://img.shields.io/npm/v/react-native-restart-app)
+![npm](https://img.shields.io/npm/dm/react-native-restart-app)
+![GitHub](https://img.shields.io/github/license/yourusername/react-native-restart-app)
 
-[![npm version](https://img.shields.io/npm/v/react-native-typescript-library-starter.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-typescript-library-starter)
-[![npm](https://img.shields.io/npm/dt/react-native-typescript-library-starter.svg?style=for-the-badge)](https://www.npmjs.com/package/react-native-typescript-library-starter)
-![Platform - Android and iOS](https://img.shields.io/badge/platform-Android%20%7C%20iOS-blue.svg?style=for-the-badge)
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
-[![styled with prettier](https://img.shields.io/badge/styled_with-prettier-ff69b4.svg?style=for-the-badge)](https://github.com/prettier/prettier)
+## Features
 
-<p align="center">
-  <img alt="React Native Typescript Library Starter"
-        src="assets/Screenshots/typescript.jpg" />
-</p>
+- 🔄 Native implementation for both iOS and Android
+- ⚡️ Lightweight and performant
+- 🎯 Simple and intuitive API
+- 🔧 Zero additional dependencies
+- 📱 Cross-platform support
+- 🛠 TypeScript support
 
-## Library Usage
-
-- `npm i`
-- `npm run husky:setup`
-- Delete example folder
-- Delete build folder
-- Make your own library into the `lib` folder
-- Change package.json
-- Change README for your own documentation
-- `npm run build`
-
-```
-> react-native-typescript-library-starter@0.1.0 build /Users/kuray/Coursion/MyLibraries/ReactNative/react-native-typescript-library-starter
-> cd lib && tsc && cp ../package.json ../build/dist/ && Echo Build completed!
-
-Build completed!
-```
-
-- Test your build/dist into the new project
-- Finally, time to npm publish :)
-
-### Below part is for Documentation ! Remove above Library Usage
-
-# Installation
-
-Add the dependency:
+## Installation
 
 ```bash
-npm i react-native-typescript-library-starter
+# Using npm
+npm install react-native-restart-app
+
+# Using yarn
+yarn add react-native-restart-app
 ```
 
-## Peer Dependencies
+### iOS Setup
 
-<h5><i>IMPORTANT! You need install them</i></h5>
+After installing the package, navigate to your iOS directory and install the pods:
 
-```js
-"react": ">= 16.x.x",
-"react-native": ">= 0.55.x",
+```bash
+cd ios && pod install && cd ..
 ```
 
-# Usage
+### Android Setup
 
-## Import
+Add the package to your `MainApplication.java`:
 
-```jsx
-import MyComponent from "react-native-typescript-library-starter";
+```java
+import com.reactnativerestartapp.RestartAppPackage;
+
+// Inside getPackages() method
+@Override
+protected List<ReactPackage> getPackages() {
+  List<ReactPackage> packages = new PackageList(this).getPackages();
+  packages.add(new RestartAppPackage());
+  return packages;
+}
 ```
 
-## Fundamental Usage
+## Usage
 
-```jsx
-<MyComponent />
+### Basic Usage
+
+```typescript
+import RestartApp from "react-native-restart-app";
+
+// Restart the app
+RestartApp.restart();
 ```
 
-## Example Project 😍
+### Example Component
 
-You can checkout the example project 🥰
+```typescript
+import React from 'react';
+import { View, Button, StyleSheet } from 'react-native';
+import RestartApp from 'react-native-restart-app';
 
-Simply run
+const App = () => {
+  const handleRestart = () => {
+    RestartApp.restart();
+  };
 
-- `npm i`
-- `react-native run-ios/android`
+  return (
+    <View style={styles.container}>
+      <Button
+        title="Restart App"
+        onPress={handleRestart}
+      />
+    </View>
+  );
+};
 
-should work of the example project.
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
-# Configuration - Props
+export default App;
+```
 
-## Fundamentals
+## How It Works
 
-| Property    |  Type  |  Default  | Description           |
-| ----------- | :----: | :-------: | --------------------- |
-| title       | string | undefined | change the title      |
-| description | string | undefined | change the descrition |
+### iOS Implementation
 
-## Customization (Optionals)
+The iOS implementation recreates the root view controller, effectively restarting the app from scratch. This ensures a clean state and proper memory management.
 
-| Property       |   Type    |  Default  | Description                                                            |
-| -------------- | :-------: | :-------: | ---------------------------------------------------------------------- |
-| enableButton   |  boolean  |   false   | let you enable the button (must use it for button)                     |
-| onPress        | function  | undefined | set your own logic for the button functionality when it is pressed     |
-| buttonText     |  string   | undefined | change the button's text                                               |
-| style          | ViewStyle |  default  | set or override the style object for the main container                |
-| buttonStyle    | ViewStyle |  default  | set or override the style object for the button style                  |
-| ImageComponent |   Image   |  default  | set your own component instead of default react-native Image component |
+### Android Implementation
 
-## Future Plans
+The Android implementation uses the package manager to launch a fresh instance of the app with the `FLAG_ACTIVITY_CLEAR_TOP` flag, which clears the activity stack and starts a new instance.
 
-- [x] ~~LICENSE~~
-- [ ] Write an article about the lib on Medium
+## Platform-Specific Behavior
 
-# Change Log
+### iOS
 
-Change log will be here !
+- Performs a complete app restart
+- Clears all view controllers
+- Resets the root window
+- Maintains system-level state
 
-## Author
+### Android
 
-FreakyCoder, kurayogun@gmail.com
+- Launches a fresh instance of the app
+- Clears the activity stack
+- Maintains background state
+- Preserves system-level configurations
+
+## Best Practices
+
+1. **Error Handling**: Use this library as part of your error recovery strategy
+2. **State Management**: Consider saving critical state before restarting
+3. **User Experience**: Provide feedback to users before restarting
+4. **Testing**: Test thoroughly in both debug and release modes
+
+## Contributing
+
+We welcome contributions! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
+
+### Development Setup
+
+1. Fork the repository
+2. Clone your fork
+3. Install dependencies: `npm install`
+4. Make your changes
+5. Run tests: `npm test`
+6. Submit a pull request
 
 ## License
 
-React Native Typescript Library Starter is available under the MIT license. See the LICENSE file for more info.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Author
+
+[Your Name] - [@yourtwitter](https://twitter.com/yourtwitter)
+
+## Support
+
+If you find this library useful, please consider:
+
+- ⭐️ Starring the repository
+- 📝 Opening issues for bugs or feature requests
+- 💪 Contributing to the project
+- ☕️ [Buy me a coffee](https://buymeacoffee.com/yourusername)
+
+## Acknowledgments
+
+- React Native team for the amazing framework
+- All contributors who have helped improve this library
+- The open-source community for inspiration and support

@@ -1,8 +1,8 @@
 {
   "compilerOptions": {
-    "target": "esnext",
-    "module": "es6",
-    "lib": ["es6"],
+    "target": "es5",
+    "module": "commonjs",
+    "lib": ["es6", "dom"],
     "allowJs": true,
     "jsx": "react-native",
     "noImplicitAny": false,
@@ -11,7 +11,7 @@
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./",
-    "outDir": "build/dist",
+    "outDir": "lib",
     "noEmitHelpers": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,
@@ -24,16 +24,12 @@
     "skipDefaultLibCheck": true,
     "skipLibCheck": true,
     "esModuleInterop": true,
-    "typeRoots": ["./node_modules/@types", "./@types"],
     "declaration": true /* Generates corresponding '.d.ts' file. */,
-    "sourceMap": true /* Generates corresponding '.map' file. */
+    "sourceMap": true /* Generates corresponding '.map' file. */,
+    "paths": {
+      "*": ["node_modules/*", "src/types/*"]
+    }
   },
-  "exclude": [
-    "example",
-    "example-manual-state",
-    "node_modules",
-    "babel.config.js",
-    "metro.config.js",
-    "jest.config.js"
-  ]
+  "include": ["lib/index.ts"],
+  "exclude": ["node_modules", "example"]
 }
