@@ -11,7 +11,7 @@
     "strict": true,
     "moduleResolution": "node",
     "baseUrl": "./",
-    "outDir": "lib",
+    "outDir": "build/dist",
     "noEmitHelpers": true,
     "alwaysStrict": true,
     "strictFunctionTypes": true,

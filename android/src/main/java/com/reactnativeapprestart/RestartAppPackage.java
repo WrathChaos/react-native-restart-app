@@ -1,4 +1,4 @@
-package com.reactnativerestartapp;
+package com.reactnativeapprestart;
 
 import com.facebook.react.ReactPackage;
 import com.facebook.react.bridge.NativeModule;

@@ -1,13 +1,16 @@
 {
-  "name": "react-native-restart-app",
-  "version": "1.0.0-alpha.1",
-  "description": "Extremely easy to create a React Native Component Library with both Stateful and Functional Component Examples.",
+  "name": "react-native-app-restart",
+  "version": "1.0.0-alpha.3",
+  "description": "A simple and efficient way to restart your React Native app programmatically",
   "main": "./build/dist/index.js",
-  "repository": "git@github.com:WrathChaos/react-native-restart-app.git",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WrathChaos/react-native-app-restart.git"
+  },
   "author": "FreakyCoder <kurayogun@gmail.com>",
   "license": "MIT",
   "homepage": "https://www.freakycoder.com",
-  "bugs": "https://github.com/WrathChaos/react-native-restart-app/issues",
+  "bugs": "https://github.com/WrathChaos/react-native-app-restart/issues",
   "files": [
     "/build",
     "/lib"
@@ -24,7 +27,7 @@
     "rn"
   ],
   "scripts": {
-    "build": "tsc -p tsconfig.json && npm run copy:assets && npm run copy:package",
+    "build": "tsc -p tsconfig.json && npm run copy:assets && npm run copy:package && npm run copy:native",
     "prepare": "husky install",
     "format": "prettier --write \"src/**/*.{ts,tsx,js,jsx}\"",
     "lint": "eslint \"lib/**/*.{ts,tsx,js,jsx}\"",
@@ -34,6 +37,7 @@
     "semantic-release": "semantic-release",
     "copy:assets": "cpx 'lib/local-assets/**' 'build/dist/local-assets'",
     "copy:package": "cpx 'package.json' 'build/dist/'",
+    "copy:native": "cpx 'android/**' 'build/dist/android/' && cpx 'ios/**' 'build/dist/ios/'",
     "husky:lint": "npx husky add .husky/pre-commit 'npm run lint'",
     "husky:prettier": "npx husky add .husky/pre-commit 'npm run prettier'"
   },
