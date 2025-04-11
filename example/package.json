@@ -12,7 +12,7 @@
   "dependencies": {
     "react": "19.0.0",
     "react-native": "0.79.0",
-    "react-native-app-restart": "1.0.0-alpha.3"
+    "react-native-app-restart": "1.0.0-alpha.4"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

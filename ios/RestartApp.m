@@ -3,6 +3,7 @@
 #import <UIKit/UIKit.h>
 #import <React/RCTBridge.h>
 #import <React/RCTBundleURLProvider.h>
+#import <React/RCTReloadCommand.h>
 
 @implementation RestartApp
 
@@ -11,9 +12,7 @@ RCT_EXPORT_MODULE(RestartApp);
 RCT_EXPORT_METHOD(restart)
 {
   dispatch_async(dispatch_get_main_queue(), ^{
-    // Get the bridge and reload
-    RCTBridge *bridge = [[RCTBridge alloc] initWithDelegate:self launchOptions:nil];
-    [bridge reload];
+    RCTTriggerReloadCommandListeners(@"Restart requested by app");
   });
 }
 
