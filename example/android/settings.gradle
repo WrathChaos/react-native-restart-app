@@ -4,3 +4,20 @@ extensions.configure(com.facebook.react.ReactSettingsExtension){ ex -> ex.autoli
 rootProject.name = 'example'
 include ':app'
 includeBuild('../node_modules/@react-native/gradle-plugin')
+include ':react-native-app-restart'
+project(':react-native-app-restart').projectDir = new File(rootProject.projectDir, '../../android/')
+project(':react-native-app-restart').buildFileName = 'build.gradle'
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
+    repositories {
+        google()
+        mavenCentral()
+        maven {
+            url("$rootDir/../node_modules/react-native/android")
+        }
+        maven {
+            url("$rootDir/../node_modules/jsc-android/dist")
+        }
+    }
+}

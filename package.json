@@ -1,6 +1,6 @@
 {
   "name": "react-native-app-restart",
-  "version": "1.0.0-alpha.4",
+  "version": "1.0.0-alpha.9",
   "description": "A simple and efficient way to restart your React Native app programmatically",
   "main": "./build/dist/index.js",
   "repository": {
